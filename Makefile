@@ -35,12 +35,24 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
+setting:
+	git clone git://github.com/jptomo/SymfonyDosTransEnv.git symfony-docs
+	cd symfony-docs
+	git submodule update --init --recursive
+	cp conf.py source-en
+	cp conf.py source-ja
+	mkdir -p source-en/_exts
+	mkdir -p source-ja/_exts
+	cp sphinx-php/configurationblock.py source-en/_exts
+	cp sphinx-php/configurationblock.py source-ja/_exts
+	cp -r _static source-en
+	cp -r _static source-ja
+
 clean:
 	-rm -rf $(BUILDDIRJA)/*
 	-rm -rf $(BUILDDIREN)/*
 
 html: html-ja html-en
-	#$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
