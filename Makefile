@@ -37,7 +37,9 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 setting:
-	git submodule update --init --recursive
+	git submodule update --init source-en
+	git submodule update --init source-$(TRANSLANG)
+	git submodule update --init misc/sphinx-php
 	cp misc/conf.py source-en
 	cp misc/conf.py source-ja
 	mkdir -p source-en/_exts
