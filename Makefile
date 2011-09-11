@@ -40,6 +40,8 @@ setting:
 	git submodule update --init source-en
 	git submodule update --init source-$(TRANSLANG)
 	git submodule update --init misc/sphinx-php
+	mkdir build-en
+	mkdir build-$(TRANSLANG)
 	#cp -r misc/_static source-en
 	#cp -r misc/_static source-$(TRANSLANG)
 	#cp -r misc/_themes source-en

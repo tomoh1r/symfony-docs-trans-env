@@ -7,12 +7,3 @@
 [submodule "misc/sphinx-php"]
 	path = misc/sphinx-php
 	url = git://github.com/fabpot/sphinx-php.git
-[submodule "source-ru"]
-	path = source-ru
-	url = git://github.com/avalanche123/symfony-docs-ru.git
-[submodule "source-ro"]
-	path = source-ro
-	url = git://github.com/sebio/symfony-docs-ro.git
-[submodule "source-it"]
-	path = source-it
-	url = git://github.com/garak/symfony-docs-it.git
