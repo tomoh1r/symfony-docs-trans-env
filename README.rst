@@ -4,7 +4,7 @@ Symfony2日本語翻訳作業用リポジトリ
 
 Symfony2のドキュメントを翻訳するための、英語・日本語のソースリポジトリの取得と、sphinxでの出力確認用の設定ファイルを入れてあります。::
 
-   $ git clone git@github.com:jptomo/SymfonyDosTransEnv.git symfony-docs
+   $ git clone git://github.com/jptomo/SymfonyDosTransEnv.git symfony-docs
    $ cd symfony-docs
    $ git submodule update --init --recursive
    $ cp conf.py source-en
