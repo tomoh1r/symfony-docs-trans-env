@@ -6,6 +6,7 @@ Symfony2のドキュメントを翻訳するための、英語・日本語のソ
 
    $ git clone git://github.com/jptomo/SymfonyDosTransEnv.git symfony-docs
    $ cd symfony-docs
+   $ make setting
    $ git submodule update --init --recursive
    $ cp conf.py source-en
    $ cp conf.py source-ja

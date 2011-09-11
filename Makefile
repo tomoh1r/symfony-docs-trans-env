@@ -36,8 +36,6 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 setting:
-	git clone git://github.com/jptomo/SymfonyDosTransEnv.git symfony-docs
-	cd symfony-docs
 	git submodule update --init --recursive
 	cp conf.py source-en
 	cp conf.py source-ja
