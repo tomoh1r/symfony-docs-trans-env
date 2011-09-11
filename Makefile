@@ -41,8 +41,8 @@ setting:
 	cp misc/conf.py source-ja
 	mkdir -p source-en/_exts
 	mkdir -p source-ja/_exts
-	cp sphinx-php/configurationblock.py source-en/_exts
-	cp sphinx-php/configurationblock.py source-ja/_exts
+	cp -r misc/sphinx-php/configurationblock.py source-en/_exts
+	cp -r misc/sphinx-php/configurationblock.py source-ja/_exts
 	cp -r misc/_static source-en
 	cp -r misc/_static source-ja
 	cp -r misc/_themes source-en

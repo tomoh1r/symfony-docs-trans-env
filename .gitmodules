@@ -4,6 +4,6 @@
 [submodule "source-en"]
 	path = source-en
 	url = git://github.com/symfony/symfony-docs.git
-[submodule "sphinx-php"]
-	path = sphinx-php
+[submodule "misc/sphinx-php"]
+	path = misc/sphinx-php
 	url = git://github.com/fabpot/sphinx-php.git
