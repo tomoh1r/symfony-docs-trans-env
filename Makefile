@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD   = sphinx-build -c misc
 PAPER         =
 TRANSLANG     = ja
 BUILDDIREN    = build-en
@@ -40,12 +40,6 @@ setting:
 	git submodule update --init source-en
 	git submodule update --init source-$(TRANSLANG)
 	git submodule update --init misc/sphinx-php
-	cp misc/conf.py source-en
-	cp misc/conf.py source-ja
-	mkdir -p source-en/_exts
-	mkdir -p source-ja/_exts
-	cp -r misc/sphinx-php/configurationblock.py source-en/_exts
-	cp -r misc/sphinx-php/configurationblock.py source-ja/_exts
 	cp -r misc/_static source-en
 	cp -r misc/_static source-ja
 	cp -r misc/_themes source-en
