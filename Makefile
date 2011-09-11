@@ -5,13 +5,14 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
-BUILDDIRJA    = build-ja
+TRANSLANG     = ja
 BUILDDIREN    = build-en
+BUILDDIRALT   = build-$(TRANSLANG)
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
-ALLSPHINXOPTSJA   = -d $(BUILDDIRJA)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source-ja
+ALLSPHINXOPTSALT  = -d $(BUILDDIRALT)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source-$(TRANSLANG)
 ALLSPHINXOPTSEN   = -d $(BUILDDIREN)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source-en
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
@@ -49,22 +50,22 @@ setting:
 	cp -r misc/_themes source-ja
 
 clean:
-	-rm -rf $(BUILDDIRJA)/*
 	-rm -rf $(BUILDDIREN)/*
+	-rm -rf $(BUILDDIRALT)/*
 
-html: html-ja html-en
+html: html-alt html-en
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
-
-html-ja:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTSJA) $(BUILDDIRJA)/html
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIRJA)/html."
 
 html-en:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTSEN) $(BUILDDIREN)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIREN)/html."
+
+html-alt:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTSALT) $(BUILDDIRALT)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIRALT)/html."
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
