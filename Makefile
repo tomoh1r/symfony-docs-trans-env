@@ -40,10 +40,10 @@ setting:
 	git submodule update --init source-en
 	git submodule update --init source-$(TRANSLANG)
 	git submodule update --init misc/sphinx-php
-	cp -r misc/_static source-en
-	cp -r misc/_static source-ja
-	cp -r misc/_themes source-en
-	cp -r misc/_themes source-ja
+	#cp -r misc/_static source-en
+	#cp -r misc/_static source-$(TRANSLANG)
+	#cp -r misc/_themes source-en
+	#cp -r misc/_themes source-$(TRANSLANG)
 
 clean:
 	-rm -rf $(BUILDDIREN)/*
