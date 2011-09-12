@@ -2,10 +2,10 @@
 #
 
 # repos
-REPO_SPHINX_PHP=https://github.com/fabpot/sphinx-php.git
+REPO_SPHINX_PHP=git://github.com/fabpot/sphinx-php.git
 DIR_SPHINX_PHP=misc/sphinx-php
-REPO_SRC=https://github.com/symfony/symfony-docs.git
-REPO_DST=https://github.com/symfony-japan/symfony-docs-ja.git
+REPO_SRC=git://github.com/symfony/symfony-docs.git
+REPO_DST=git://github.com/symfony-japan/symfony-docs-ja.git
 
 # You can set these variables from the command line.
 TRANSLANG      = ja
