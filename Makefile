@@ -1,6 +1,12 @@
 # Makefile for Sphinx documentation
 #
 
+# repos
+REPO_SPHINX_PHP=https://github.com/fabpot/sphinx-php.git
+DIR_SPHINX_PHP=misc/sphinx-php
+REPO_SRC=https://github.com/symfony/symfony-docs.git
+REPO_DST=https://github.com/symfony-japan/symfony-docs-ja.git
+
 # You can set these variables from the command line.
 TRANSLANG      = ja
 SPHINXOPTS_SRC = -D language=$(TRANSLANG)
@@ -30,15 +36,14 @@ help:
 	@echo "  clean-dst  to clean HTML files for DST"
 
 setting:
+	git submodule add $(REPO_SPHINX_PHP) $(DIR_SPHINX_PHP)
+	git submodule add $(REPO_SRC) $(SOURCEDIR_SRC)
+	git submodule add $(REPO_DST) $(SOURCEDIR_DST)
 	git submodule update --init $(SOURCEDIR_SRC)
 	git submodule update --init $(SROUCEDIR_DST)
-	git submodule update --init misc/sphinx-php
+	git submodule update --init $(DIR_SPHINX_PHP)
 	mkdir -p $(BUILDDIR_SRC)
 	mkdir -p $(BUILDDIR_DST)
-	@#cp -r misc/_static source-en
-	@#cp -r misc/_static source-$(TRANSLANG)
-	@#cp -r misc/_themes source-en
-	@#cp -r misc/_themes source-$(TRANSLANG)
 
 clean: clean-src clean-dst
 
