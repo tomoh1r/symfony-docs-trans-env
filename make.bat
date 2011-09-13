@@ -1,15 +1,32 @@
 @ECHO OFF
+setlocal
 
 REM Command file for Sphinx documentation
 
+REM repos
+set REPO_SPHINX_PHP=git://github.com/fabpot/sphinx-php.git
+set DIR_SPHINX_PHP=misc/sphinx-php
+set REPO_SRC=git://github.com/symfony/symfony-docs.git
+set REPO_DST=git://github.com/symfony-japan/symfony-docs-ja.git
+
+REM You can set these variables from the command line.
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=sphinx-build
+	set SPHINXBUILD=sphinx-build -c misc
 )
-set BUILDDIR=build
-set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% source
-if NOT "%PAPER%" == "" (
-	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%
-)
+set TRANSLANG=ja
+set SPHINXOPTS_SRC=-D language=%TRANSLANG%
+set SPHINXOPTS_DST=
+set PAPER=
+set SOURCEDIR_SRC=source-en
+set SOURCEDIR_DST=source-%TRANSLANG%
+set BUILDDIR_SRC=build-en
+set BUILDDIR_DST=build-%TRANSLANG%
+
+REM Internal variables.
+set PAPEROPT_a4=-D latex_paper_size=a4
+set PAPEROPT_letter=-D latex_paper_size=letter
+set ALLSPHINXOPTS_SRC=-d %BUILDDIR_SRC%/doctrees %SPHINXOPTS_SRC% %SOURCEDIR_SRC%
+set ALLSPHINXOPTS_DST=-d %BUILDDIR_DST%/doctrees %SPHINXOPTS_DST% %SOURCEDIR_DST%
 
 if "%1" == "" goto help
 
@@ -17,154 +34,72 @@ if "%1" == "help" (
 	:help
 	echo.Please use `make ^<target^>` where ^<target^> is one of
 	echo.  html       to make standalone HTML files
-	echo.  dirhtml    to make HTML files named index.html in directories
-	echo.  singlehtml to make a single large HTML file
-	echo.  pickle     to make pickle files
-	echo.  json       to make JSON files
-	echo.  htmlhelp   to make HTML files and a HTML help project
-	echo.  qthelp     to make HTML files and a qthelp project
-	echo.  devhelp    to make HTML files and a Devhelp project
-	echo.  epub       to make an epub
-	echo.  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
-	echo.  text       to make text files
-	echo.  man        to make manual pages
-	echo.  changes    to make an overview over all changed/added/deprecated items
-	echo.  linkcheck  to check all external links for integrity
-	echo.  doctest    to run all doctests embedded in the documentation if enabled
+	echo.  html-src   to make standalone HTML files for SRC
+	echo.  html-dst   to make standalone HTML files for DST
+	echo.  clean      to clean HTML files
+	echo.  clean-src  to clean HTML files for SRC
+	echo.  clean-dst  to clean HTML files for DST
+	goto end
+)
+
+if "%1" == "setting" (
+	git submodule add %REPO_SPHINX_PHP% %DIR_SPHINX_PHP%
+	git submodule add %REPO_SRC% %SOURCEDIR_SRC%
+	git submodule add %REPO_DST% %SOURCEDIR_DST%
+	git submodule update --init %SOURCEDIR_SRC%
+	git submodule update --init %SROUCEDIR_DST%
+	git submodule update --init %DIR_SPHINX_PHP%
+	mkdir %BUILDDIR_SRC%
+	mkdir %BUILDDIR_DST%
 	goto end
 )
 
 if "%1" == "clean" (
-	for /d %%i in (%BUILDDIR%\*) do rmdir /q /s %%i
-	del /q /s %BUILDDIR%\*
+	for /d %%i in (%BUILDDIR_SRC%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR_SRC%\*
+	for /d %%i in (%BUILDDIR_DST%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR_DST%\*
+)
+
+if "%1" == "clean-src" (
+	for /d %%i in (%BUILDDIR_SRC%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR_SRC%\*
+	goto end
+)
+
+if "%1" == "clean-dst" (
+	for /d %%i in (%BUILDDIR_DST%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR_DST%\*
 	goto end
 )
 
 if "%1" == "html" (
-	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS_SRC% %BUILDDIR_SRC%/html
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
+	echo.Build finished. The HTML pages are in %BUILDDIR_SRC%/html.
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS_DST% %BUILDDIR_DST%/html
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR_DST%/html.
 	goto end
 )
 
-if "%1" == "dirhtml" (
-	%SPHINXBUILD% -b dirhtml %ALLSPHINXOPTS% %BUILDDIR%/dirhtml
+if "%1" == "html-src" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS_SRC% %BUILDDIR_SRC%/html
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished. The HTML pages are in %BUILDDIR%/dirhtml.
+	echo.Build finished. The HTML pages are in %BUILDDIR_SRC%/html.
 	goto end
 )
 
-if "%1" == "singlehtml" (
-	%SPHINXBUILD% -b singlehtml %ALLSPHINXOPTS% %BUILDDIR%/singlehtml
+if "%1" == "html-dst" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS_DST% %BUILDDIR_DST%/html
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished. The HTML pages are in %BUILDDIR%/singlehtml.
-	goto end
-)
-
-if "%1" == "pickle" (
-	%SPHINXBUILD% -b pickle %ALLSPHINXOPTS% %BUILDDIR%/pickle
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; now you can process the pickle files.
-	goto end
-)
-
-if "%1" == "json" (
-	%SPHINXBUILD% -b json %ALLSPHINXOPTS% %BUILDDIR%/json
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; now you can process the JSON files.
-	goto end
-)
-
-if "%1" == "htmlhelp" (
-	%SPHINXBUILD% -b htmlhelp %ALLSPHINXOPTS% %BUILDDIR%/htmlhelp
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; now you can run HTML Help Workshop with the ^
-.hhp project file in %BUILDDIR%/htmlhelp.
-	goto end
-)
-
-if "%1" == "qthelp" (
-	%SPHINXBUILD% -b qthelp %ALLSPHINXOPTS% %BUILDDIR%/qthelp
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; now you can run "qcollectiongenerator" with the ^
-.qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\SymfonyDocs.qhcp
-	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\SymfonyDocs.ghc
-	goto end
-)
-
-if "%1" == "devhelp" (
-	%SPHINXBUILD% -b devhelp %ALLSPHINXOPTS% %BUILDDIR%/devhelp
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished.
-	goto end
-)
-
-if "%1" == "epub" (
-	%SPHINXBUILD% -b epub %ALLSPHINXOPTS% %BUILDDIR%/epub
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished. The epub file is in %BUILDDIR%/epub.
-	goto end
-)
-
-if "%1" == "latex" (
-	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; the LaTeX files are in %BUILDDIR%/latex.
-	goto end
-)
-
-if "%1" == "text" (
-	%SPHINXBUILD% -b text %ALLSPHINXOPTS% %BUILDDIR%/text
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished. The text files are in %BUILDDIR%/text.
-	goto end
-)
-
-if "%1" == "man" (
-	%SPHINXBUILD% -b man %ALLSPHINXOPTS% %BUILDDIR%/man
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished. The manual pages are in %BUILDDIR%/man.
-	goto end
-)
-
-if "%1" == "changes" (
-	%SPHINXBUILD% -b changes %ALLSPHINXOPTS% %BUILDDIR%/changes
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.The overview file is in %BUILDDIR%/changes.
-	goto end
-)
-
-if "%1" == "linkcheck" (
-	%SPHINXBUILD% -b linkcheck %ALLSPHINXOPTS% %BUILDDIR%/linkcheck
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Link check complete; look for any errors in the above output ^
-or in %BUILDDIR%/linkcheck/output.txt.
-	goto end
-)
-
-if "%1" == "doctest" (
-	%SPHINXBUILD% -b doctest %ALLSPHINXOPTS% %BUILDDIR%/doctest
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Testing of doctests in the sources finished, look at the ^
-results in %BUILDDIR%/doctest/output.txt.
+	echo.Build finished. The HTML pages are in %BUILDDIR_DST%/html.
 	goto end
 )
 
 :end
+endlocal
