@@ -1,6 +1,6 @@
-============================================
-Symfony2 Manual Translation repository for 
-============================================
+========================================
+Symfony2 Manual Translation repository 
+========================================
 
 This make a translation environment for Symfony2 Manual
 on your pc/mac.
