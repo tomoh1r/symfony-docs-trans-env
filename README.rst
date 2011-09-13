@@ -26,8 +26,7 @@ please use the latest documentation.
 
    $ git clone git://github.com/jptomo/symfony-docs-trans-env.git
    $ cd symfony-docs-trans-env
-   $ vim Makefile # Makefile 内の REPO_DST TRANSLANG が正しい値と
-                  # なっていることを確認します。 
+   $ vim Makefile # Check REPO_DST TRANSLANG in Makefile
    $ make setting
 
 Translation, translation, and how to contact
