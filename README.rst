@@ -12,8 +12,8 @@ Prerequisites
 - Sphinx 1.0.7
 - Git
 
-Environmental Building Steps
-===============================
+Installation
+==============
 
 In the following four stages, they will provide
 an environment for building Symfony2 manual.
@@ -29,8 +29,8 @@ please use the latest documentation.
    $ vim Makefile # Check REPO_DST TRANSLANG in Makefile
    $ make setting
 
-Translation, translation, and how to contact
-===============================================
+Translation and how to contribute
+=====================================
 
 Once you have decided to translate the file, `git blame-l (files to be translated) ' to confirm the commit ID of the file, the ID of the date listed below, please add to the first line.
 
