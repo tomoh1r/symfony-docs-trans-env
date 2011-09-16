@@ -1,0 +1,9 @@
+[submodule "misc/sphinx-php"]
+	path = misc/sphinx-php
+	url = git://github.com/fabpot/sphinx-php.git
+[submodule "source-en"]
+	path = source-en
+	url = git://github.com/symfony/symfony-docs.git
+[submodule "source-ja"]
+	path = source-ja
+	url = git://github.com/symfony-japan/symfony-docs-ja.git

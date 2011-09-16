@@ -46,3 +46,9 @@ Then `Fork` on github repository.
 After the fork, to `Pull Request`.
 
 and wait.
+
+License
+=========
+
+This is licensed under the MIT license.
+
