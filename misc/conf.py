@@ -27,7 +27,8 @@ sys.path.append(os.path.abspath('./sphinx-php'))
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.ifconfig',
-              'sphinx.ext.viewcode', 'sphinx.ext.extlinks', 'configurationblock']
+              'sphinx.ext.viewcode', 'sphinx.ext.extlinks', 'configurationblock',
+              'sphinxcontrib.phpdomain',]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['./templates/']
@@ -87,11 +88,14 @@ show_authors = True
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'native'
+primary_domain = 'php'
 highlight_language = 'php'
 
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 lexers['php'] = PhpLexer(startinline=True)
+lexers['php-annotations'] = PhpLexer(startinline=True)
+
 #from pygments.lexers.web import PhpLexer
 #PhpLexer.startinline = True
 
