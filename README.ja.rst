@@ -10,6 +10,7 @@ sphinxでの出力確認用の設定ファイルを入れてあります。
 ============
 
 - Sphinx 1.0.7
+- sphinxcontrib-phpdomain
 - git
 
 環境の構築手順

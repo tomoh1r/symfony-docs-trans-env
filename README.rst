@@ -10,6 +10,7 @@ Prerequisites
 ==============
 
 - Sphinx 1.0.7
+- sphinxcontrib-phpdomain
 - Git
 
 Installation
