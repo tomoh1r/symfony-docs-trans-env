@@ -36,12 +36,11 @@ help:
 	@echo "  clean-dst  to clean HTML files for DST"
 
 setting:
-	git submodule add $(REPO_SPHINX_PHP) $(DIR_SPHINX_PHP)
 	git submodule add $(REPO_SRC) $(SOURCEDIR_SRC)
 	git submodule add $(REPO_DST) $(SOURCEDIR_DST)
+	git submodule update --init $(DIR_SPHINX_PHP)
 	git submodule update --init $(SOURCEDIR_SRC)
 	git submodule update --init $(SROUCEDIR_DST)
-	git submodule update --init $(DIR_SPHINX_PHP)
 	mkdir -p $(BUILDDIR_SRC)
 	mkdir -p $(BUILDDIR_DST)
 
